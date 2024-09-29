@@ -31,7 +31,20 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       #- name: Build and Analyze with SonarCloud
       #  run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+      # Step to compile the project before running SonarCloud analysis
+      - name: Build Project
+        run: mvn clean install
+
+      # Run SonarCloud scan with compiled classes available
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@v3.0.0
         env:
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.organization=gjanos
+            -Dsonar.projectKey=GJanos_mvn-sonar-gitaction
+            -Dsonar.sources=src/main/java
+            -Dsonar.tests=src/test/java
+            -Dsonar.java.binaries=target/classes
+            -Dsonar.exclusions=**/generated/**
