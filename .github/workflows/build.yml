@@ -42,10 +42,7 @@ jobs:
           echo "SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}"
 
       - name: Build and Analyze with SonarCloud
-        uses: sonarsource/sonarqube-scan-action@v2.1.0  # Use the latest version of the action
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
-        with:
-          projectBaseDir: .  # Project root directory
+          run: mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.organization=${{ secrets.SONAR_ORG_KEY }}
