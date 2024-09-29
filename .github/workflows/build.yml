@@ -42,12 +42,9 @@ jobs:
           echo "SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}"
           echo "SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}"
 
+
       - name: Build and Analyze with SonarCloud
         env:
-          #SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-          -Dsonar.projectKey=GJanos_mvn-sonar-gitaction \
-          -Dsonar.organization=gjanos \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.projectName="mvn-sonar-gitaction"
+        run: mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=GJanos_mvn-sonar-gitaction -Dsonar.organization=gjanos -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectName="mvn-sonar-gitaction"
+
