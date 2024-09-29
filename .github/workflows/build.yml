@@ -40,5 +40,4 @@ jobs:
         #  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         #  SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         #run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.organization=${{ secrets.SONAR_ORG_KEY }} -Dsonar.projectName='${{ secrets.SONAR_PROJECT_NAME }}'
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.organization=${{ secrets.SONAR_ORG_KEY }} -Dsonar.projectName='${{ secrets.SONAR_PROJECT_NAME }}'
-
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
