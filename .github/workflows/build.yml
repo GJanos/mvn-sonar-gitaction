@@ -20,19 +20,20 @@ jobs:
         with:
           java-version: 17
 
-      - name: Cache SonarQube packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
+      # Comment out cache steps to rule out caching issues
+      # - name: Cache SonarQube packages
+      #   uses: actions/cache@v1
+      #   with:
+      #     path: ~/.sonar/cache
+      #     key: ${{ runner.os }}-sonar
+      #     restore-keys: ${{ runner.os }}-sonar
 
-      - name: Cache Maven packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
+      # - name: Cache Maven packages
+      #   uses: actions/cache@v1
+      #   with:
+      #     path: ~/.m2
+      #     key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+      #     restore-keys: ${{ runner.os }}-m2
 
       - name: Verify Environment Variables
         run: |
@@ -43,8 +44,8 @@ jobs:
 
       - name: Build and Analyze with SonarCloud
         env:
-          SONAR_HOST_URL: "https://sonarcloud.io"
-          SONAR_TOKEN: "78fcfe073623423a1eca383b6516c7d614b54f1a"
+          SONAR_HOST_URL: https://sonarcloud.io
+          SONAR_TOKEN: 78fcfe073623423a1eca383b6516c7d614b54f1a
         run: mvn -X clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
             -Dsonar.projectKey=GJanos_mvn-sonar-gitaction \
             -Dsonar.organization=gjanos
