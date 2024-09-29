@@ -35,14 +35,9 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build and Analyze with SonarCloud
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
-          SONAR_ORG_KEY: ${{ secrets.SONAR_ORG_KEY }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: |
           mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
             -Dsonar.organization=${{ secrets.SONAR_ORG_KEY }} \
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
